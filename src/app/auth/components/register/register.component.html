@@ -8,18 +8,25 @@
           <!---->
         </p>
         BackendErrors are hire
-        <form novalidate="" class="ng-pristine ng-invalid ng-touched" _lpchecked="1">
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
           <fieldset>
             <fieldset class="form-group">
-              <!----><input class="form-control form-control-lg ng-pristine ng-valid ng-touched"
-                formcontrolname="username" placeholder="Username" type="text">
+              <input id="username" type="text" formControlName="username" required class="form-control form-control-lg"
+                placeholder="Username">
             </fieldset>
-            <fieldset class="form-group"><input class="form-control form-control-lg ng-pristine ng-invalid ng-touched"
-                formcontrolname="email" placeholder="Email" type="text">
+
+            <fieldset class="form-group">
+              <input id="email" type="text" formControlName="email" class="form-control form-control-lg"
+                placeholder="Email">
             </fieldset>
-            <fieldset class="form-group"><input class="form-control form-control-lg ng-pristine ng-invalid ng-touched"
-                formcontrolname="password" placeholder="Password" type="password"></fieldset><button
-              class="btn btn-lg btn-primary pull-xs-right" type="submit" disabled=""> Sign up </button>
+
+            <fieldset class="form-group">
+              <input id="password" type="text" formControlName="password" class="form-control form-control-lg "
+                placeholder="Password" type="password">
+            </fieldset>
+
+            <button type="submit" class="btn btn-lg btn-primary pull-xs-right"> Sign up
+            </button>
           </fieldset>
         </form>
       </div>
