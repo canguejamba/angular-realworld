@@ -7,7 +7,7 @@ import {FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-   profileForm = this.formBuilder.group({
+  registerForm = this.formBuilder.group({
     username: ['', Validators.required],
     email: ['', Validators.required],
     password: ['', Validators.required],
@@ -21,6 +21,6 @@ export class RegisterComponent {
 
   onSubmit() {
     // TODO: Use EventEmitter with form value
-    console.log('submit',this.profileForm.value, this.profileForm.valid);
+    console.log('submit',this.registerForm.value, this.registerForm.valid);
   }
 }
