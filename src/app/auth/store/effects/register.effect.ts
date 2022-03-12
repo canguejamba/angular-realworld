@@ -8,6 +8,7 @@ import {
 import {AuthService} from 'src/app/auth/service/auth.service'
 import {CurrentUserInterface} from 'src/app/shared/types/currentUser.interface'
 import {catchError, map, of, switchMap} from 'rxjs'
+import {HttpErrorResponse} from '@angular/common/http'
 
 @Injectable()
 export class EffectRegister {
@@ -20,8 +21,10 @@ export class EffectRegister {
           map((currentUser: CurrentUserInterface) => {
             return actionRegisterSuccess({currentUser})
           }),
-          catchError(() => {
-            return of(actionRegisterFailure())
+          catchError((errorResponse: HttpErrorResponse) => {
+            return of(
+              actionRegisterFailure({errors: errorResponse.error.errors})
+            )
           })
         )
       })
