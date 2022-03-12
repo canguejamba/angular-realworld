@@ -7,6 +7,7 @@ import {AppStateInterface} from 'src/app/shared/types/appState.interface'
 import {isSubmittingSelector} from 'src/app/auth/store/actions/ngrx-storeSelectors'
 import {AuthService} from 'src/app/auth/service/auth.service'
 import {CurrentUserInterface} from 'src/app/shared/types/currentUser.interface'
+import {RequestRegisterInterface} from '../../types/requestRegister.interface'
 
 @Component({
   selector: 'mc-register',
@@ -39,11 +40,10 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     // TODO: Use EventEmitter with form value
     console.log('submit', this.registerForm.value, this.registerForm.valid)
-    this.ngrxStore.dispatch(actionRegister(this.registerForm.value))
-    this.authService
-      .register(this.registerForm.value)
-      .subscribe((currentUser: CurrentUserInterface) => {
-        console.log('currentUser', currentUser)
-      })
+    const request: RequestRegisterInterface = {
+      user: this.registerForm.value,
+    }
+
+    this.ngrxStore.dispatch(actionRegister({request}))
   }
 }
