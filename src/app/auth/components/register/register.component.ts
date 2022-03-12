@@ -2,10 +2,10 @@ import {Component, OnInit} from '@angular/core'
 import {FormBuilder, Validators} from '@angular/forms'
 import {select, Store} from '@ngrx/store'
 import {Observable} from 'rxjs'
-import {actionRegister} from 'src/app/auth/store/actions'
+import {actionRegister} from 'src/app/auth/store/actions/register.action'
 import {AppStateInterface} from 'src/app/shared/types/appState.interface'
-import {isSubmittingSelector} from 'src/app/auth/store/ngrx-storeSelectors'
-import {AuthService} from '../../service/auth.service'
+import {isSubmittingSelector} from 'src/app/auth/store/actions/ngrx-storeSelectors'
+import {AuthService} from 'src/app/auth/service/auth.service'
 import {CurrentUserInterface} from 'src/app/shared/types/currentUser.interface'
 
 @Component({

@@ -5,7 +5,7 @@ import {RouterModule, Routes} from '@angular/router'
 import {StoreModule} from '@ngrx/store'
 
 import {RegisterComponent} from 'src/app/auth/components/register/register.component'
-import {btnFormRegisterSubmitStateReducer} from 'src/app/auth/store/reducers'
+import {btnFormRegisterSubmitStateReducer} from 'src/app/auth/store/actions/reducers'
 import {AuthService} from 'src/app/auth/service/auth.service'
 
 const routes: Routes = [
