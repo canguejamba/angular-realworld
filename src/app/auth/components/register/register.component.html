@@ -25,7 +25,8 @@
                 placeholder="Password" type="password">
             </fieldset>
 
-            <button type="submit" class="btn btn-lg btn-primary pull-xs-right"> Sign up
+            <button type="submit" [disabled]="isSubmitting$ | async" class="btn btn-lg btn-primary pull-xs-right"> Sign
+              up
             </button>
           </fieldset>
         </form>
