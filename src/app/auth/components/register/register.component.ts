@@ -1,13 +1,16 @@
 import {Component, OnInit} from '@angular/core'
-import {FormBuilder, Validators} from '@angular/forms'
+import {FormBuilder, FormGroup, Validators} from '@angular/forms'
 import {select, Store} from '@ngrx/store'
 import {Observable} from 'rxjs'
 import {actionRegister} from 'src/app/auth/store/actions/register.action'
 import {AppStateInterface} from 'src/app/shared/types/appState.interface'
-import {isSubmittingSelector} from 'src/app/auth/store/actions/ngrx-storeSelectors'
+import {
+  isSubmittingSelector,
+  validationErrorsSelector,
+} from 'src/app/auth/store/actions/ngrx-storeSelectors'
 import {AuthService} from 'src/app/auth/service/auth.service'
-import {CurrentUserInterface} from 'src/app/shared/types/currentUser.interface'
-import {RequestRegisterInterface} from '../../types/requestRegister.interface'
+import {RequestRegisterInterface} from 'src/app/auth/types/requestRegister.interface'
+import {BackendErrorsInterface} from 'src/app/shared/types/BackendErrors.interface'
 
 @Component({
   selector: 'mc-register',
@@ -15,27 +18,34 @@ import {RequestRegisterInterface} from '../../types/requestRegister.interface'
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
+  registerForm: FormGroup
   isSubmitting$: Observable<boolean>
-  registerForm = this.formBuilder.group({
-    username: ['', Validators.required],
-    email: ['', Validators.required],
-    password: ['', Validators.required],
-  })
+  backendErrors$: Observable<BackendErrorsInterface | null>
 
   constructor(
     private formBuilder: FormBuilder,
     private ngrxStore: Store,
-    private store: Store<AppStateInterface>,
-    private authService: AuthService
+    private store: Store<AppStateInterface>
   ) {}
   ngOnInit(): void {
     this.initializeValues()
-    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector))
-    console.log('isSubmitting ', this.isSubmitting$)
+    this.initializeForm()
+
     //
   }
 
-  initializeValues(): void {}
+  initializeValues(): void {
+    this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector))
+    this.backendErrors$ = this.store.pipe(select(validationErrorsSelector))
+  }
+  initializeForm(): void {
+    console.log('initializeForm')
+    this.registerForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+    })
+  }
 
   onSubmit() {
     // TODO: Use EventEmitter with form value
