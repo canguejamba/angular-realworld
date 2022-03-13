@@ -12,11 +12,16 @@ import {EffectRegister} from 'src/app/auth/store/effects/register.effect'
 import {BackendErrorsMessagesModule} from 'src/app/shared/modules/backendErrorsMessages/backendErrorsMessages.module'
 import {LocalStoregePersistenceService} from 'src/app/shared/services/localstoragePersistence.service'
 import {EffectLogin} from 'src/app/auth/store/effects/login.effect'
+import {LoginComponent} from 'src/app/auth/components/login/login.component'
 
 const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
   },
 ]
 
@@ -29,7 +34,7 @@ const routes: Routes = [
     EffectsModule.forFeature([EffectRegister, EffectLogin]),
     BackendErrorsMessagesModule,
   ],
-  declarations: [RegisterComponent],
+  declarations: [RegisterComponent, LoginComponent],
   providers: [AuthService, LocalStoregePersistenceService],
 })
 export class AuthModule {}
