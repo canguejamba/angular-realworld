@@ -8,7 +8,6 @@ import {
   isSubmittingSelector,
   validationErrorsSelector,
 } from 'src/app/auth/store/actions/ngrx-storeSelectors'
-import {AuthService} from 'src/app/auth/service/auth.service'
 import {RequestRegisterInterface} from 'src/app/auth/types/requestRegister.interface'
 import {BackendErrorsInterface} from 'src/app/shared/types/BackendErrors.interface'
 
@@ -48,7 +47,6 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
-    // TODO: Use EventEmitter with form value
     console.log('submit', this.registerForm.value, this.registerForm.valid)
     const request: RequestRegisterInterface = {
       user: this.registerForm.value,
