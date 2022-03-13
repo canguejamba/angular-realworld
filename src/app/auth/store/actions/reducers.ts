@@ -5,6 +5,11 @@ import {
   actionRegisterFailure,
   actionRegisterSuccess,
 } from 'src/app/auth/store/actions/register.action'
+import {
+  actionLogin,
+  actionLoginFailure,
+  actionLoginSuccess,
+} from 'src/app/auth/store/actions/login.action'
 
 const initialState: AuthStateInterface = {
   isSubmitting: false,
@@ -15,6 +20,7 @@ const initialState: AuthStateInterface = {
 
 const authReducer = createReducer(
   initialState,
+  // state of register
   on(
     actionRegister,
     (state): AuthStateInterface => ({
@@ -39,12 +45,35 @@ const authReducer = createReducer(
       isSubmitting: false,
       validationErrors: action.errors,
     })
+  ),
+  // state of login
+  on(
+    actionLogin,
+    (state): AuthStateInterface => ({
+      ...state,
+      isSubmitting: true,
+      validationErrors: null,
+    })
+  ),
+  on(
+    actionLoginSuccess,
+    (state, action): AuthStateInterface => ({
+      ...state,
+      isSubmitting: false,
+      isLoadingIn: true,
+      currentUser: action.currentUser,
+    })
+  ),
+  on(
+    actionLoginFailure,
+    (state, action): AuthStateInterface => ({
+      ...state,
+      isSubmitting: false,
+      validationErrors: action.errors,
+    })
   )
 )
 
-export function btnFormRegisterSubmitStateReducer(
-  state: AuthStateInterface,
-  action: Action
-) {
+export function reducer(state: AuthStateInterface, action: Action) {
   return authReducer(state, action)
 }
