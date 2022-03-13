@@ -9,6 +9,7 @@ import {AuthService} from 'src/app/auth/service/auth.service'
 import {CurrentUserInterface} from 'src/app/shared/types/currentUser.interface'
 import {catchError, map, of, switchMap} from 'rxjs'
 import {HttpErrorResponse} from '@angular/common/http'
+import {LocalStoregePersistenceService} from 'src/app/shared/services/localstoragePersistence.service'
 
 @Injectable()
 export class EffectRegister {
@@ -19,6 +20,10 @@ export class EffectRegister {
       switchMap(({request}) => {
         return this.authService.register(request).pipe(
           map((currentUser: CurrentUserInterface) => {
+            this.localStoregePersistenceService.set(
+              'accessToken',
+              currentUser.token
+            )
             return actionRegisterSuccess({currentUser})
           }),
           catchError((errorResponse: HttpErrorResponse) => {
@@ -31,5 +36,9 @@ export class EffectRegister {
     )
   )
 
-  constructor(private action$: Actions, private authService: AuthService) {}
+  constructor(
+    private action$: Actions,
+    private authService: AuthService,
+    private localStoregePersistenceService: LocalStoregePersistenceService
+  ) {}
 }
