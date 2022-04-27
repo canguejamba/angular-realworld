@@ -2,9 +2,8 @@
 
 This project is an Angular implementations of the Thinkster 'Real World' front end 'Conduit' which is a Medium clone.
 
-
-<img src="/src/assets/img/27-4-2022_175114_angular.realworld.io.jpeg" alt="angular real world screen" style=" width:800px;"/>
-The project is hosted here - https://mattr.z19.web.core.windows.net
+<img src="/src/assets/img/27-4-2022_175114_angular.realworld.io.jpeg" alt="angular real world screen" style=" width:600px;"/>
+The project is hosted here - https://angular.realworld.io/
 
 The project is Angular style guide and best practice compliant and, as far as I can see, correctly implements the functionality of the 'Conduit' front end.
 
