@@ -1,27 +1,62 @@
-# MediumcloneAngular
+# Angular Real World implementation
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5.
+This project is an Angular implementations of the Thinkster 'Real World' front end 'Conduit' which is a Medium clone.
 
-## Development server
+The project is hosted here - https://mattr.z19.web.core.windows.net
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+The project is Angular style guide and best practice compliant and, as far as I can see, correctly implements the functionality of the 'Conduit' front end.
 
-## Code scaffolding
+Although building Conduit doesn't quite require you to exercise the vast totality of Angular functionality, it does need most of the key features you need to understand to build a production Angular application including,
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Reusable components
+2. Routing included child routes, route guards
+3. Observables for HTTP and state sharing
+4. Authentication (as in basic token auth)
+5. Custom directives
+6. Project layout and structure with Angular CLI
+7. Some basic unit testing
 
-## Build
+## Running and Building the Project
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Project uses the (awesome) Angular CLI for build.
 
-## Running unit tests
+1. Install the Angular CLI globally.
+2. Run npm install to resolve all dependencies.
+3. Run ng serve
+4. In a browser navigate to http://localhost:4200/
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Functionality overview
 
-## Running end-to-end tests
+(copied from the gothinkster GitHub page)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+The example application is a social blogging site (i.e. a Medium.com clone) called "Conduit". It uses a custom API for all requests, including authentication.
 
-## Further help
+**General functionality:**
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- Authenticate users via JWT (login/signup pages + logout button on settings page)
+- CRU\* users (sign up & settings page - no deleting required)
+- CRUD Articles
+- CR\*D Comments on articles (no updating required)
+- GET and display paginated lists of articles
+- Favorite articles
+- Follow other users
+
+**The general page breakdown looks like this:**
+
+- Home page (URL: /#/ )
+  - List of tags
+  - List of articles pulled from either Feed, Global, or by Tag
+  - Pagination for list of articles
+- Sign in/Sign up pages (URL: /#/login, /#/register )
+  - Uses JWT (store the token in localStorage)
+  - Authentication can be easily switched to session/cookie based
+- Settings page (URL: /#/settings )
+- Editor page to create/edit articles (URL: /#/editor, /#/editor/article-slug-here )
+- Article page (URL: /#/article/article-slug-here )
+  - Delete article button (only shown to article's author)
+  - Render markdown from server client side
+  - Comments section at bottom of page
+  - Delete comment button (only shown to comment's author)
+- Profile page (URL: /#/profile/:username, /#/profile/:username/favorites )
+  - Show basic user info
+  - List of articles populated from author's created articles or author's favorited articles
